@@ -1,0 +1,458 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/pro/ontologies/2026/8/untitled-ontology-13#"
+     xml:base="http://www.semanticweb.org/pro/ontologies/2026/8/untitled-ontology-13"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:core="https://schema.bank.com/ontology/core#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:Credit="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Credit/"
+     xmlns:Relations="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/pro/ontologies/2026/8/untitled-ontology-13"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#generatesRiskWeighting -->
+
+    <owl:ObjectProperty rdf:about="https://schema.bank.com/ontology/core#generatesRiskWeighting">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility"/>
+        <rdfs:range rdf:resource="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RiskAssessment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#impactsLedgerPosition -->
+
+    <owl:ObjectProperty rdf:about="https://schema.bank.com/ontology/core#impactsLedgerPosition">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility"/>
+        <rdfs:range rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FIN/FinancialControl/GeneralLedgerEntry"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#initiatesTransactionTo -->
+
+    <owl:ObjectProperty rdf:about="https://schema.bank.com/ontology/core#initiatesTransactionTo">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdfs:range rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#isMemberOfHousehold -->
+
+    <owl:ObjectProperty rdf:about="https://schema.bank.com/ontology/core#isMemberOfHousehold">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Person"/>
+        <rdfs:range rdf:resource="https://schema.bank.com/ontology/core#HouseholdUnit"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#requiresLedgerData -->
+
+    <owl:ObjectProperty rdf:about="https://schema.bank.com/ontology/core#requiresLedgerData"/>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#requiresRiskData -->
+
+    <owl:ObjectProperty rdf:about="https://schema.bank.com/ontology/core#requiresRiskData"/>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#rollsUpToRegulatoryReport -->
+
+    <owl:ObjectProperty rdf:about="https://schema.bank.com/ontology/core#rollsUpToRegulatoryReport">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RiskAssessment"/>
+        <rdfs:range rdf:resource="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RegulatoryReport"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#sharesDigitalIdentityWith -->
+
+    <owl:ObjectProperty rdf:about="https://schema.bank.com/ontology/core#sharesDigitalIdentityWith">
+        <owl:inverseOf rdf:resource="https://schema.bank.com/ontology/core#sharesDigitalIdentityWith"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdfs:range rdf:resource="https://schema.bank.com/ontology/core#DigitalIdentity"/>
+        <rdfs:comment>Used for Fraud Detection: Links disconnected parties using identical IPs/Devices.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Credit/isSecuredBy -->
+
+    <owl:ObjectProperty rdf:about="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Credit/isSecuredBy">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility"/>
+        <rdfs:range rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Credit/CollateralAsset"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/isLiableFor -->
+
+    <owl:ObjectProperty rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/isLiableFor">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdfs:range rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#hasClientId -->
+
+    <owl:DatatypeProperty rdf:about="https://schema.bank.com/ontology/core#hasClientId">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>SK_ID_CURR</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#hasFacilityStatus -->
+
+    <owl:DatatypeProperty rdf:about="https://schema.bank.com/ontology/core#hasFacilityStatus">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Values: Current, Fully Paid, Default, Charged Off</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#hasPrincipalAmount -->
+
+    <owl:DatatypeProperty rdf:about="https://schema.bank.com/ontology/core#hasPrincipalAmount">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label>loan_amnt</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#hasProbabilityOfDefault -->
+
+    <owl:DatatypeProperty rdf:about="https://schema.bank.com/ontology/core#hasProbabilityOfDefault">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RiskAssessment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:comment>Calculated PD percentage derived from the Risk Engine</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#hasRiskGrade -->
+
+    <owl:DatatypeProperty rdf:about="https://schema.bank.com/ontology/core#hasRiskGrade">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RiskAssessment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>grade</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#hasTransactionAmount -->
+
+    <owl:DatatypeProperty rdf:about="https://schema.bank.com/ontology/core#hasTransactionAmount">
+        <rdfs:domain rdf:resource="https://schema.bank.com/ontology/core#initiatesTransactionTo"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label>Amount</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#hasTransactionTimestamp -->
+
+    <owl:DatatypeProperty rdf:about="https://schema.bank.com/ontology/core#hasTransactionTimestamp">
+        <rdfs:domain rdf:resource="https://schema.bank.com/ontology/core#initiatesTransactionTo"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:label>Timestamp</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#hasVerifiedIncome -->
+
+    <owl:DatatypeProperty rdf:about="https://schema.bank.com/ontology/core#hasVerifiedIncome">
+        <rdfs:domain rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label>AMT_INCOME_TOTAL</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#DigitalIdentity -->
+
+    <owl:Class rdf:about="https://schema.bank.com/ontology/core#DigitalIdentity">
+        <rdfs:label>Digital Identity (Device ID / IP)</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#HouseholdUnit -->
+
+    <owl:Class rdf:about="https://schema.bank.com/ontology/core#HouseholdUnit">
+        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdfs:label>Household Unit</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#RAROCCalculationConstraint -->
+
+    <owl:Class rdf:about="https://schema.bank.com/ontology/core#RAROCCalculationConstraint">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://schema.bank.com/ontology/core#requiresLedgerData"/>
+                        <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FIN/FinancialControl/GeneralLedgerEntry"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://schema.bank.com/ontology/core#requiresRiskData"/>
+                        <owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RiskAssessment"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment>Rule: Prevents AI hallucination of profitability metrics without verifying both Ledger and Risk domains.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#initiatesTransactionTo -->
+
+    <owl:Class rdf:about="https://schema.bank.com/ontology/core#initiatesTransactionTo"/>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Credit/CollateralAsset -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Credit/CollateralAsset">
+        <rdfs:label>Pledged Collateral Asset</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FIN/FinancialControl/GeneralLedgerEntry -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/FIN/FinancialControl/GeneralLedgerEntry">
+        <rdfs:label>General Ledger Position</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/LegalEntity -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/LegalEntity">
+        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdfs:label>Legal Entity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party">
+        <rdfs:label>Party</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Person -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Person">
+        <rdfs:subClassOf rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdfs:label>Natural Person</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility">
+        <rdfs:label>Credit / Loan Facility</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RegulatoryReport -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RegulatoryReport">
+        <rdfs:label>Regulatory Submission (Basel / CCAR)</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RiskAssessment -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RiskAssessment">
+        <rdfs:label>Risk Assessment (PD, LGD, RWA)</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Collateral_CRE_Northwest -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Collateral_CRE_Northwest">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Credit/CollateralAsset"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Device_IP_192_168 -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Device_IP_192_168">
+        <rdf:type rdf:resource="https://schema.bank.com/ontology/core#DigitalIdentity"/>
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <core:sharesDigitalIdentityWith rdf:resource="https://schema.bank.com/ontology/core#Person_JohnDoe"/>
+        <core:sharesDigitalIdentityWith rdf:resource="https://schema.bank.com/ontology/core#Person_UnknownHacker"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Household_Doe -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Household_Doe">
+        <rdf:type rdf:resource="https://schema.bank.com/ontology/core#HouseholdUnit"/>
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Ledger_Entry_991 -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Ledger_Entry_991">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FIN/FinancialControl/GeneralLedgerEntry"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Loan_Mortgage_101 -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Loan_Mortgage_101">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/LoanFacility"/>
+        <core:generatesRiskWeighting rdf:resource="https://schema.bank.com/ontology/core#Risk_Downgrade_Q3"/>
+        <core:impactsLedgerPosition rdf:resource="https://schema.bank.com/ontology/core#Ledger_Entry_991"/>
+        <Credit:isSecuredBy rdf:resource="https://schema.bank.com/ontology/core#Collateral_CRE_Northwest"/>
+        <core:hasFacilityStatus>Current</core:hasFacilityStatus>
+        <core:hasPrincipalAmount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">450000.00</core:hasPrincipalAmount>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Person_JaneDoe -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Person_JaneDoe">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Person"/>
+        <core:isMemberOfHousehold rdf:resource="https://schema.bank.com/ontology/core#Household_Doe"/>
+        <core:hasVerifiedIncome rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">95000.00</core:hasVerifiedIncome>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Person_JohnDoe -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Person_JohnDoe">
+        <rdf:type rdf:resource="https://schema.bank.com/ontology/core#DigitalIdentity"/>
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Person"/>
+        <core:isMemberOfHousehold rdf:resource="https://schema.bank.com/ontology/core#Household_Doe"/>
+        <core:sharesDigitalIdentityWith rdf:resource="https://schema.bank.com/ontology/core#Device_IP_192_168"/>
+        <Relations:isLiableFor rdf:resource="https://schema.bank.com/ontology/core#Loan_Mortgage_101"/>
+        <core:hasVerifiedIncome rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120000.00</core:hasVerifiedIncome>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Person_UnknownHacker -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Person_UnknownHacker">
+        <rdf:type rdf:resource="https://schema.bank.com/ontology/core#DigitalIdentity"/>
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Party"/>
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/Person"/>
+        <core:sharesDigitalIdentityWith rdf:resource="https://schema.bank.com/ontology/core#Device_IP_192_168"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://schema.bank.com/ontology/core#Risk_Downgrade_Q3 -->
+
+    <owl:NamedIndividual rdf:about="https://schema.bank.com/ontology/core#Risk_Downgrade_Q3">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/RiskAssessment"/>
+        <core:hasProbabilityOfDefault rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.08</core:hasProbabilityOfDefault>
+        <core:hasRiskGrade>C</core:hasRiskGrade>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="https://schema.bank.com/ontology/core#HouseholdRiskInference">
+        <rdfs:comment>Rule: HouseholdUnit -&gt; isMemberOf^-1 -&gt; Person -&gt; isLiableFor -&gt; LoanFacility -&gt; generatesRiskWeighting -&gt; RiskAssessment</rdfs:comment>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://schema.bank.com/ontology/core#SyntheticFraudInference">
+        <rdfs:comment>Rule: Party -&gt; sharesDigitalIdentityWith -&gt; DigitalIdentity &lt;- sharesDigitalIdentityWith &lt;- Party (WHERE NOT isMemberOfHousehold)</rdfs:comment>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://schema.bank.com/ontology/core#initiatesTransactionTo">
+        <rdfs:comment>Directed edge representing cash flow between two parties.</rdfs:comment>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://spec.edmcouncil.org/fibo/ontology/FIN/FinancialControl/ProfitabilityMetric">
+        <rdfs:label>Profitability Metric (NIM, RAROC)</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

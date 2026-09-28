@@ -1,0 +1,39 @@
+================================================================================
+ONTOLOGY ARCHITECTURE SUMMARY: BANKING GRAPHRAG
+================================================================================
+Reference Context: Banking GraphRAG Architecture
+
+1. PURPOSE
+The Ontology acts as the deterministic semantic engine for the AI Agent. It 
+replaces probabilistic LLM hallucination with strict, machine-readable rules 
+governing how Retail, Risk, and Finance data intersect.
+
+2. CORE COMPONENTS
+* T-Box (Terminology Box): 
+  The structural schema (Classes and Taxonomies). Curated by the Information 
+  Architect using FIBO/BIAN standards. Prevents semantic ambiguity.
+
+* A-Box (Assertion Box): 
+  The instance data. Curated by the Data Architect. Streams physical Lakehouse 
+  records (e.g., Kaggle datasets) into the T-Box structure via PySpark/Kafka.
+
+* Object Properties (The Edges): 
+  Defines valid cross-domain relationships (e.g., a Loan isSecuredBy Collateral). 
+  Provides the exact traversal paths used by the AI's MCP tools.
+
+* Data Properties (The Math Bridge): 
+  Maps relational columns to strict data types (xsd:decimal, xsd:dateTime). 
+  Ensures the dbt Semantic Layer receives perfectly typed data for RAROC and 
+  DTI calculations.
+
+* Inference Axioms (The Logic Engine): 
+  Automated rules (owl:Restriction). Automatically flags synthetic fraud or 
+  infers household risk exposure based on structural logic, entirely bypassing 
+  the LLM's reasoning engine to guarantee regulatory compliance.
+
+3. STRATEGIC ALIGNMENT
+By decoupling the rules of banking from both the source systems and the AI 
+model, the Ontology provides a unified, auditable layer of truth that satisfies 
+the Business (Capital Optimization), Data (Lakehouse Contracts), and AI 
+(Zero-Hallucination) strategies.
+================================================================================

@@ -1,0 +1,213 @@
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-loan-ln-ln:  <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/Loans/> .
+@prefix fibo-fbc-da-crd:  <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Credit/> .
+@prefix fibo-risk:        <https://spec.edmcouncil.org/fibo/ontology/RISK/Risk/> .
+@prefix fibo-fin:         <https://spec.edmcouncil.org/fibo/ontology/FIN/FinancialControl/> .
+@prefix bank-sem:         <https://schema.bank.com/ontology/core#> .
+@prefix owl:              <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:             <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:              <http://www.w3.org/2001/XMLSchema#> .
+
+# ==========================================
+# 1. TAXONOMY (Core Business Classes)
+# ==========================================
+
+# -- Retail & Entity Domain --
+fibo-fnd-pty-pty:Party a owl:Class ;
+    rdfs:label "Party" .
+
+fibo-fnd-pty-pty:Person a owl:Class ;
+    rdfs:subClassOf fibo-fnd-pty-pty:Party ;
+    rdfs:label "Natural Person" .
+
+fibo-fnd-pty-pty:LegalEntity a owl:Class ;
+    rdfs:subClassOf fibo-fnd-pty-pty:Party ;
+    rdfs:label "Legal Entity" .
+
+bank-sem:HouseholdUnit a owl:Class ;
+    rdfs:subClassOf fibo-fnd-pty-pty:Party ;
+    rdfs:label "Household Unit" .
+
+bank-sem:DigitalIdentity a owl:Class ;
+    rdfs:label "Digital Identity (Device ID / IP)" .
+
+# -- Product & Lending Domain --
+fibo-loan-ln-ln:LoanFacility a owl:Class ;
+    rdfs:label "Credit / Loan Facility" .
+
+fibo-fbc-da-crd:CollateralAsset a owl:Class ;
+    rdfs:label "Pledged Collateral Asset" .
+
+# -- Risk & Compliance Domain --
+fibo-risk:RiskAssessment a owl:Class ;
+    rdfs:label "Risk Assessment (PD, LGD, RWA)" .
+
+fibo-risk:RegulatoryReport a owl:Class ;
+    rdfs:label "Regulatory Submission (Basel / CCAR)" .
+
+# -- Financial Control Domain --
+fibo-fin:GeneralLedgerEntry a owl:Class ;
+    rdfs:label "General Ledger Position" .
+
+fibo-fin:ProfitabilityMetric a owl:Class ;
+    rdfs:label "Profitability Metric (NIM, RAROC)" .
+
+# ==========================================
+# 2. SEMANTICS (Cross-Domain Object Properties)
+# ==========================================
+
+# -- Household Resolution Edges --
+bank-sem:isMemberOfHousehold a owl:ObjectProperty ;
+    rdfs:domain fibo-fnd-pty-pty:Person ;
+    rdfs:range bank-sem:HouseholdUnit .
+
+bank-sem:sharesDigitalIdentityWith a owl:ObjectProperty, owl:SymmetricProperty ;
+    rdfs:domain fibo-fnd-pty-pty:Party ;
+    rdfs:range bank-sem:DigitalIdentity ;
+    rdfs:comment "Used for Fraud Detection: Links disconnected parties using identical IPs/Devices." .
+
+# -- Liability & Collateral Edges --
+fibo-fnd-rel-rel:isLiableFor a owl:ObjectProperty ;
+    rdfs:domain fibo-fnd-pty-pty:Party ;
+    rdfs:range fibo-loan-ln-ln:LoanFacility .
+
+fibo-fbc-da-crd:isSecuredBy a owl:ObjectProperty ;
+    rdfs:domain fibo-loan-ln-ln:LoanFacility ;
+    rdfs:range fibo-fbc-da-crd:CollateralAsset .
+
+# -- Risk & Finance Integration Edges --
+bank-sem:generatesRiskWeighting a owl:ObjectProperty ;
+    rdfs:domain fibo-loan-ln-ln:LoanFacility ;
+    rdfs:range fibo-risk:RiskAssessment .
+
+bank-sem:impactsLedgerPosition a owl:ObjectProperty ;
+    rdfs:domain fibo-loan-ln-ln:LoanFacility ;
+    rdfs:range fibo-fin:GeneralLedgerEntry .
+
+bank-sem:rollsUpToRegulatoryReport a owl:ObjectProperty ;
+    rdfs:domain fibo-risk:RiskAssessment ;
+    rdfs:range fibo-risk:RegulatoryReport .
+
+# -- Transactional Edges --
+bank-sem:initiatesTransactionTo a owl:ObjectProperty ;
+    rdfs:domain fibo-fnd-pty-pty:Party ;
+    rdfs:range fibo-fnd-pty-pty:Party ;
+    rdfs:comment "Directed edge representing cash flow between two parties." .
+
+# ==========================================
+# 3. DATA PROPERTIES (Dataset Column Mappings)
+# ==========================================
+
+# -- Retail Domain Properties (e.g., Home Credit Dataset) --
+bank-sem:hasClientId a owl:DatatypeProperty ;
+    rdfs:domain fibo-fnd-pty-pty:Party ;
+    rdfs:range xsd:string ;
+    rdfs:label "SK_ID_CURR" .
+
+bank-sem:hasVerifiedIncome a owl:DatatypeProperty ;
+    rdfs:domain fibo-fnd-pty-pty:Person ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "AMT_INCOME_TOTAL" .
+
+# -- Lending Domain Properties (e.g., Lending Club Dataset) --
+bank-sem:hasPrincipalAmount a owl:DatatypeProperty ;
+    rdfs:domain fibo-loan-ln-ln:LoanFacility ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "loan_amnt" .
+
+bank-sem:hasFacilityStatus a owl:DatatypeProperty ;
+    rdfs:domain fibo-loan-ln-ln:LoanFacility ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Values: Current, Fully Paid, Default, Charged Off" .
+
+# -- Risk Domain Properties (e.g., Lending Club Dataset) --
+bank-sem:hasRiskGrade a owl:DatatypeProperty ;
+    rdfs:domain fibo-risk:RiskAssessment ;
+    rdfs:range xsd:string ;
+    rdfs:label "grade" .
+
+bank-sem:hasProbabilityOfDefault a owl:DatatypeProperty ;
+    rdfs:domain fibo-risk:RiskAssessment ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Calculated PD percentage derived from the Risk Engine" .
+
+# -- Finance & Transaction Properties (e.g., IBM AML Dataset) --
+bank-sem:hasTransactionAmount a owl:DatatypeProperty ;
+    rdfs:domain bank-sem:initiatesTransactionTo ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "Amount" .
+
+bank-sem:hasTransactionTimestamp a owl:DatatypeProperty ;
+    rdfs:domain bank-sem:initiatesTransactionTo ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "Timestamp" .
+
+# ==========================================
+# 4. BUSINESS RULES (Logical Axioms & Inferences)
+# ==========================================
+
+# Rule 1: Household Risk Inheritance
+bank-sem:HouseholdRiskInference a owl:Restriction ;
+    owl:onProperty bank-sem:hasIndirectRiskExposure ;
+    rdfs:comment "Rule: HouseholdUnit -> isMemberOf^-1 -> Person -> isLiableFor -> LoanFacility -> generatesRiskWeighting -> RiskAssessment" .
+
+# Rule 2: Synthetic Fraud Identification
+bank-sem:SyntheticFraudInference a owl:Restriction ;
+    owl:onProperty bank-sem:requiresFraudInvestigation ;
+    rdfs:comment "Rule: Party -> sharesDigitalIdentityWith -> DigitalIdentity <- sharesDigitalIdentityWith <- Party (WHERE NOT isMemberOfHousehold)" .
+
+# Rule 3: Cross-Domain Profitability Constraint
+bank-sem:RAROCCalculationConstraint a owl:Class ;
+    owl:intersectionOf (
+        [ a owl:Restriction ; owl:onProperty bank-sem:requiresLedgerData ; owl:someValuesFrom fibo-fin:GeneralLedgerEntry ]
+        [ a owl:Restriction ; owl:onProperty bank-sem:requiresRiskData ; owl:someValuesFrom fibo-risk:RiskAssessment ]
+    ) ;
+    rdfs:comment "Rule: Prevents AI hallucination of profitability metrics without verifying both Ledger and Risk domains." .
+
+# ==========================================
+# 5. INSTANCE DATA (A-Box / Individuals)
+# ==========================================
+
+# -- 1. Create a Digital Identity (For Fraud Query) --
+bank-sem:Device_IP_192_168 a bank-sem:DigitalIdentity .
+
+# -- 2. Create the Household and Parties --
+bank-sem:Household_Doe a bank-sem:HouseholdUnit .
+
+bank-sem:Person_JohnDoe a fibo-fnd-pty-pty:Person ;
+    bank-sem:isMemberOfHousehold bank-sem:Household_Doe ;
+    bank-sem:hasVerifiedIncome "120000.00"^^xsd:decimal ;
+    bank-sem:sharesDigitalIdentityWith bank-sem:Device_IP_192_168 .
+
+bank-sem:Person_JaneDoe a fibo-fnd-pty-pty:Person ;
+    bank-sem:isMemberOfHousehold bank-sem:Household_Doe ;
+    bank-sem:hasVerifiedIncome "95000.00"^^xsd:decimal .
+
+bank-sem:Person_UnknownHacker a fibo-fnd-pty-pty:Person ;
+    # Intentionally NOT a member of Household_Doe to trigger the fraud query
+    bank-sem:sharesDigitalIdentityWith bank-sem:Device_IP_192_168 .
+
+# -- 3. Create the Collateral, Ledger, and Risk Nodes --
+bank-sem:Collateral_CRE_Northwest a fibo-fbc-da-crd:CollateralAsset .
+
+bank-sem:Risk_Downgrade_Q3 a fibo-risk:RiskAssessment ;
+    bank-sem:hasRiskGrade "C" ;
+    bank-sem:hasProbabilityOfDefault "0.08"^^xsd:decimal .
+
+bank-sem:Ledger_Entry_991 a fibo-fin:GeneralLedgerEntry .
+
+# -- 4. Create the Loan Facility and Wire the Relationships --
+bank-sem:Loan_Mortgage_101 a fibo-loan-ln-ln:LoanFacility ;
+    bank-sem:hasPrincipalAmount "450000.00"^^xsd:decimal ;
+    bank-sem:hasFacilityStatus "Current" ;
+    
+    # Wiring to Collateral (For Query 4)
+    fibo-fbc-da-crd:isSecuredBy bank-sem:Collateral_CRE_Northwest ;
+    
+    # Wiring to Risk and Finance (For Query 3)
+    bank-sem:generatesRiskWeighting bank-sem:Risk_Downgrade_Q3 ;
+    bank-sem:impactsLedgerPosition bank-sem:Ledger_Entry_991 .
+
+# -- 5. Link the Party to the Liability (For Query 1 & 4) --
+bank-sem:Person_JohnDoe fibo-fnd-rel-rel:isLiableFor bank-sem:Loan_Mortgage_101 .
