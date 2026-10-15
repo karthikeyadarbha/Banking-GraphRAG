@@ -1,66 +1,149 @@
-# Banking GraphRAG Architecture: Household Financial Intelligence
+# Enterprise Banking GraphRAG Architecture
 
-## Overall Project Goal
-The primary objective of this architecture is to replace naive, hallucination-prone Vector RAG implementations with a deterministic, semantically grounded **Agentic GraphRAG** engine. Designed specifically for the highly regulated banking sector, this solution shifts the enterprise from evaluating isolated individual accounts to analyzing holistic "Household Units" (for a complete review of the foundational summaries and progress, please reference the Banking GraphRAG Architecture file). 
+## Executive Overview
 
-By fusing industry-standard conceptual ontologies with physical knowledge graphs and governed mathematical semantic layers, the architecture creates an auditable, zero-hallucination AI copilot. This copilot automates complex, multi-domain financial decisioning—including Risk-Adjusted Return on Capital (RAROC) calculations, synthetic fraud detection, and regulatory compliance reporting (Basel III/CCAR).
+This repository contains the enterprise architecture, semantic ontologies, SHACL validation shapes, 3NF conformed staging data models, Data Vault 2.0 designs, and automated CI/CD governance pipelines for the **Semantic-Graph Ontological Mortgage & Retail Banking System**.
 
-## Implementation Context: The Strategic Triad
-Executing this architecture requires moving beyond traditional centralized IT models and aligning three distinct enterprise strategies. The implementation context relies on a decentralized Data Mesh operating model where business domains own their data products, stitched together by automated governance.
-
-### 1. Business Strategy: Capital Optimization
-*   **Household-Centricity:** Realigns operational KPIs to measure and optimize the "Share of Household Wallet" rather than cross-selling to disconnected individuals.
-*   **Risk-Adjusted Profitability:** Automates the calculation of RAROC at the exact household level, allowing the bank to prove lower default correlations, hold less regulatory capital buffer, and directly increase Return on Equity (ROE).
-*   **Compliance Automation:** Utilizes the AI Agent to draft defensible regulatory narratives based strictly on verified balance sheet and risk engine data.
-
-### 2. Data Strategy: Decentralized Trust
-*   **Silo Eradication:** Integrates fragmented, vertically integrated source systems (Core Banking, CRM, Loan Origination, Risk) into a unified Cloud Lakehouse (Medallion architecture).
-*   **Governance-as-Code:** Implements strict Canonical Data Contracts (YAML/JSON schema) at the ingestion boundary. If a source system changes its data format, the CI/CD pipeline breaks before the Knowledge Graph is polluted.
-*   **Cross-Domain Reconciliation:** Physically maps General Ledger entries (Finance) to Credit Facilities (Retail) and Risk Assessments (Compliance), eliminating manual monthly data reconciliation.
-
-### 3. AI Strategy: Deterministic Execution
-*   **The AI Orchestrator:** Strips the Large Language Model (LLM) of its ability to perform raw data extraction, relationship inference, or inline arithmetic. The LLM functions purely as a reasoning orchestrator.
-*   **Model Context Protocol (MCP):** Acts as the execution firewall. The AI accesses enterprise data solely through highly governed, read-only MCP API tools.
-*   **100% Auditability:** Ensures every AI-generated conclusion (e.g., a loan rejection) can be traced directly back to a certified graph node or a governed metric formula, satisfying the explainability mandate of financial regulators.
-
-## Core Architectural Components
-The implementation relies on four integrated structural pillars to enforce the zero-hallucination boundary:
-
-*   **The Conceptual Ontology (FIBO / BIAN):** The machine-readable rulebook. It uses the Banking Industry Architecture Network (BIAN) to define structural service domains and the Financial Industry Business Ontology (FIBO) to establish the semantic boundaries and inference rules of banking entities (Parties, Facilities, Collateral).
-*   **The Physical Knowledge Graph (Neo4j):** The contextual engine. It stores the physical data instances streamed from the Lakehouse, enabling instant, multi-hop traversal to resolve complex corporate ownership chains, co-signers, and synthetic identity fraud rings.
-*   **The Semantic Data Layer (dbt MetricFlow):** The mathematical engine. It locks all complex financial logic (Debt-to-Income, Loan-to-Value, Net Interest Margin) into version-controlled code, physically preventing the AI from hallucinating regulatory ratios.
-*   **The Agentic Interface (MCP Tools):** The bridge layer. When a user prompts the AI, it calls specific tools that traverse the Knowledge Graph for relationships, query the Semantic Layer for the exact math, and synthesize the verified facts into natural language.
-
-
-# Banking GraphRAG Architecture: Household Financial Intelligence Engine
-
-An enterprise-grade, deterministic **Agentic GraphRAG Architecture** designed for the banking sector. This solution replaces naive, hallucination-prone Vector RAG implementations with a semantically grounded, ontology-driven knowledge graph and governed semantic layer. It operates across retail banking, risk management, regulatory compliance (Basel III/CCAR), and finance.
+By unifying **BIAN Service Domains**, **FIBO (Financial Industry Business Ontology)** semantics, **Data Vault 2.0**, **Neo4j Knowledge Graphs**, and **dbt MetricFlow**, this system replaces unreliable vector-only RAG with **100% deterministic, audit-traceable, zero-hallucination Ontological GraphRAG** for agentic AI in enterprise banking.
 
 ---
 
-## 1. Executive Summary & Strategic Triad
+## Checkpoint Status: CHECKPOINT-01
+* **Milestone Name:** CHECKPOINT-01: SEMANTIC_ARCHITECTURE_&_GOVERNANCE_FROZEN
+* **Version Tag:** v2.0.0-design-approved
+* **Status:** All semantic ontologies, business rule axioms, 3-Gate ingestion fences, data privacy tokenization controls, and architecture decision logs are formally approved and frozen for implementation.
 
-Traditional Vector RAG systems fail in enterprise banking because chunk-based similarity search cannot resolve multi-hop corporate/household relationships or perform deterministic financial arithmetic. This architecture establishes a strict **zero-hallucination boundary**: the LLM functions purely as a reasoning orchestrator using the **Model Context Protocol (MCP)** to execute deterministic queries against a Knowledge Graph and a governed Semantic Layer.
+---
+
+## Repository Directory Layout
 
 ```text
-+-----------------------------------------------------------------------------+
-|                                AI AGENT LAYER                               |
-|                     (Reasoning & Natural Language UI)                       |
-+-----------------------------------------------------------------------------+
-                                      |
-                     Model Context Protocol (MCP) Tools
-                                      |
-       +------------------------------+------------------------------+
-       |                                                             |
-       v                                                             v
-+-------------------------------+                   +-------------------------------+
-|    KNOWLEDGE GRAPH (Neo4j)    |                   |   SEMANTIC LAYER (dbt / SQL)  |
-|  (Relationships & Ontologies) |                   |    (Governed Financial Math)  |
-+-------------------------------+                   +-------------------------------+
-       ^                                                             ^
-       |                                                             |
-+---------------------------------------------------------------------------+
-|                          LAKEHOUSE / MEDALLION LAYER                      |
-|                  (Databricks / Snowflake - Delta / Iceberg)               |
-+---------------------------------------------------------------------------+
+banking-graphrag-architecture/
+├── docs/
+│   ├── adr/
+│   │   ├── ADR-LOG-v2.md                       # Formal Decision Log (ADRs 001–007)
+│   │   └── ADR-LOG-v1.md                       # Initial Decision Log (ADRs 001–005)
+│   ├── digests/
+│   │   └── medium-digest-banking-graphrag.md   # Publication-ready executive summary digest
+│   └── diagrams/
+│       ├── system-dependency-map-v2.png       # End-to-End System & Security Map (v2)
+│       ├── strategy-traceability-map-v2.png   # Strategic Lineage Matrix (v2)
+│       ├── system-dependency-map-v1.png       # Baseline System Map
+│       └── strategy-traceability-map-v1.png   # Baseline Strategy Map
+│
+├── ontology/
+│   ├── core/
+│   │   └── fibo_banking_core.ttl               # W3C OWL 2 Ontology with Property Chain Axioms
+│   ├── shapes/
+│   │   └── shapes-lending.ttl                  # SHACL Data Quality Shapes
+│   └── queries/
+│       └── business-rules-test-suite.sparql    # SPARQL Regression Query Suite (Rules 1–7)
+│
+├── data-models/
+│   ├── staging-3nf/
+│   │   ├── staging-data-model-erd-v2.png       # Conformed 3NF ERD v2 (FPE & ABAC Attributes)
+│   │   └── staging-data-model-erd-v1.png       # Baseline 3NF ERD
+│   └── raw-vault/
+│       └── data-vault-architecture.md          # Hubs, Links, Satellites, PIT & Bridge Tables
+│
+└── ci-cd/
+    ├── scripts/
+    │   └── validate_ontology.py                # pySHACL & Turtle Quality Linter Script
+    └── workflows/
+        └── ontology-governance-ci.yml          # GitHub Actions CI/CD Pipeline
+```
 
+---
+
+## Key Updates & Latest Architectural Enhancements (v2 Release)
+
+### 1. Data Privacy & Security Overhaul (GDPR / CCPA / NPI)
+* **Format-Preserving Encryption (FPE):** Replaced cleartext SSN/EIN with `TOKENIZED_TAX_ID` in `STG_PARTY`.
+* **KMS AES-256 Column Encryption:** Encrypted sensitive names (`ENCRYPTED_FIRST_NAME`, `ENCRYPTED_LAST_NAME`).
+* **Device & Cyber Anonymization:** Replaced raw identifiers with `HASHED_DEVICE_ID` (SHA-256) and `ANONYMIZED_IP_SUBNET` in `STG_DIGITAL_IDENTITY`.
+* **Pre-LLM Anonymizer Gateway:** Enforced prompt sanitization before payloads reach FastMCP tools or LLM context windows.
+
+### 2. Attribute-Based Access Control (ABAC) & BCBS 239 Lineage
+* **Data Classification Tags:** Added explicit `DATA_CLASSIFICATION` metadata (`RESTRICTED_PII`, `CONFIDENTIAL`) to all 10 staging entities for dynamic row/column-level masking in Databricks/Snowflake.
+* **Cryptographic Lineage:** Standardized `RECORD_SOURCE` (operational system tracking) and `LOAD_DTS` (WORM immutable timestamps) across all 3NF tables and Data Vault Satellites.
+
+### 3. Fair Lending & Non-Bias Guardrails (FCRA / ECOA / NIST AI RMF 1.0)
+* **Demographic Exclusion Verification:** Explicitly tagged `STG_RISK_ASSESSMENT` with `NON_DEMOGRAPHIC_BIAS_FLAG` ensuring race, gender, age, and protected class attributes are excluded from automated credit scoring and Probability of Default (PD) models.
+
+### 4. Updated Architecture Decision Log (`ADR-LOG-v2.md`)
+* **ADR-001:** W3C OWL 2 / FIBO / BIAN Modular Monorepo Architecture.
+* **ADR-002:** 3-Gate Control Ingestion Architecture.
+* **ADR-003:** Hybrid Storage Layer (Data Vault 2.0 Lakehouse + Neo4j Graph).
+* **ADR-004:** AI Decoupling via dbt MetricFlow & FastMCP Protocol Wrappers.
+* **ADR-005:** Conformed 3NF Staging Layer as Intermediate Pipeline Bridge.
+* **ADR-006 (New):** Format-Preserving Encryption (FPE) PII Tokenization & ABAC Access Controls.
+* **ADR-007 (New):** Cryptographic Data Lineage Tracking & Immutable WORM Audit Storage.
+
+---
+
+## Core Architectural Layers & 3-Gate Control Fence
+
+```text
+ [ OPERATIONAL SOURCE SYSTEMS ]
+ (KYC/AML, Raw Data Lake, Mortgage POS/CRM, LOS Encompass, Collateral Admin, Servicing MSP, Capital Markets)
+                                │
+                                ▼
+ [ GATE 1: INGESTION BOUNDARY ]
+ └── Canonical Data Contracts (Kafka / Avro Schemas with FPE PII Tokenization)
+                                │
+                                ▼
+ [ GATE 2: STAGING & SHACL QUALITY GATE ]
+ ├── Conformed 3NF Staging Layer (STG_*)
+ ├── pySHACL Quality Linter (shapes-lending.ttl)
+ └── DLQ Automated Quarantine & Alerting Engine
+                                │
+                                ▼
+ [ GATE 3: CORE STORAGE & KNOWLEDGE GRAPH ]
+ ├── Data Vault 2.0 (Hubs, Links, Satellites, PIT & Bridge Tables)
+ └── Neo4j Knowledge Graph (fibo_banking_core.ttl + OWL Property Chains)
+                                │
+                                ▼
+ [ AGENTIC AI EXECUTION LAYER ]
+ ├── dbt MetricFlow Semantic Layer (Certified DTI, LTV, RAROC, RWA Metrics)
+ └── FastMCP Read-Only Tool Wrappers (NIST AI RMF 1.0 Compliant)
+```
+
+---
+
+## Governance-as-Code & SPARQL Test Suite
+
+Every pull request updating `.ttl` or shape files automatically triggers the `ontology-governance-ci.yml` pipeline executing `validate-ontology.py`.
+
+### 7 Refined Business Rules Tested (`business-rules-test-suite.sparql`):
+1. **Rule 1 (Household Exposure):** Transitive property chain inferring indirect household liability (`bank-sem:hasIndirectRiskExposure`).
+2. **Rule 2 (Cross-Collateralization):** Symmetric property chain detecting shared collateral across facilities (`bank-sem:isCrossCollateralizedWith`).
+3. **Rule 3 (Multi-Hop UBO):** Transitive corporate ownership traversal (`bank-sem:hasIndirectUBOExposure`).
+4. **Rule 4 (Synthetic Fraud):** Detection of shared digital footprints without household bonds (`bank-sem:SyntheticFraudRiskFlag`).
+5. **Rule 5 (RAROC AI Firewall):** Intersection class requiring GL revenue and Risk assessment before profitability calculation (`bank-sem:ValidRAROCEvaluation`).
+6. **Rule 6 (Capital Reserve Trigger):** Automated Basel III RWA penalty flag on collateral downgrade (`bank-sem:RequiresCapitalBufferIncrease`).
+7. **Rule 7 (Household Credit Guardrail):** Mandatory income verification for all primary household members (`bank-sem:FullyVerifiedHousehold`).
+
+---
+
+## Summary of Project Artifacts
+
+| Artifact File | Description / Purpose |
+| :--- | :--- |
+| **`project-readme-v2.md`** | Primary project documentation, architectural overview, and directory guide. |
+| **`staging-data-model-erd-v2.png`** | Conformed 3NF Staging ERD v2 with FPE encryption, ABAC metadata, and lineage columns. |
+| **`system-dependency-map-v2.png`** | End-to-end 3-Gate system architecture and security overlay diagram. |
+| **`strategy-traceability-map-v2.png`** | Strategic alignment matrix linking business goals to technical control outcomes. |
+| **`architectural-decision-records-v2.md`** | Formal decision log documenting ADRs 001–007. |
+| **`medium-digest-banking-graphrag.md`** | Publication-ready Medium article digesting the strategic architecture. |
+| **`shapes-lending.ttl`** | SHACL data quality shape constraints for loan ingestion. |
+| **`business-rules-test-suite.sparql`** | SPARQL regression query suite validating 7 business rule axioms. |
+| **`validate-ontology.py`** | Automated Python linter for RDF/SHACL validation. |
+| **`ontology-governance-ci.yml`** | GitHub Actions workflow for automated PR governance gates. |
+
+---
+
+## Next Steps: Phase 2 Implementation Roadmap
+
+1. **Materialize Data Vault 2.0 Pipelines:** Build dbt staging transformation models and SHA-256 hash key generation scripts.
+2. **Stream CDC to Neo4j:** Implement PySpark graph projection pipelines streaming Data Vault changes into Neo4j nodes and edges.
+3. **Deploy FastMCP Protocol Wrappers:** Wrap certified dbt metrics and Cypher queries in read-only FastMCP tools for LLM integration.
